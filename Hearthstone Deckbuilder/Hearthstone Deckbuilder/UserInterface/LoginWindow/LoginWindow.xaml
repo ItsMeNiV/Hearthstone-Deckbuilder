@@ -1,7 +1,7 @@
-﻿<Window x:Class="Hearthstone_Deckbuilder.MainWindow"
+﻿<Window x:Class="Hearthstone_Deckbuilder.UserInterface.LoginWindow.LoginWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+        Title="LoginWindow" Height="300" Width="300">
     <Grid>
         
     </Grid>
