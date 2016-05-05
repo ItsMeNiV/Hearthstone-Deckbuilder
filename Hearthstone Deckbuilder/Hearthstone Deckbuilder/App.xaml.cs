@@ -25,6 +25,7 @@ namespace Hearthstone_Deckbuilder
             else
             {
                 Console.WriteLine("Wrong Usage.\nPlease add the API Key and the Postgre Connection String to the debug commandline arguments");
+                base.Shutdown();
             }
         }
     }
