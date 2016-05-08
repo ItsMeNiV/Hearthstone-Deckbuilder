@@ -4,7 +4,7 @@ using System.Data;
 
 namespace Hearthstone_Deckbuilder.Database.DatabaseConnector
 {
-    class DatabaseConnectionHandler
+    public class DatabaseConnectionHandler
     {
 
         public NpgsqlConnection connectToDatabase()
