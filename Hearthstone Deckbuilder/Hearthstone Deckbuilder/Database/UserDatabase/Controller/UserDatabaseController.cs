@@ -77,6 +77,22 @@ namespace Hearthstone_Deckbuilder.Database.UserDatabase.Controller
             return false;
         }
 
+        public bool deleteUser(User user)
+        {
+            DatabaseConnector.DatabaseConnectionHandler dc = new DatabaseConnector.DatabaseConnectionHandler();
+            NpgsqlConnection conn = dc.connectToDatabase();
+            conn.CreateCommand();
+            NpgsqlCommand command = new NpgsqlCommand("delete from DBUser where username = :value1");
+            command.Parameters.Add(new NpgsqlParameter("value1", DbType.String));
+            command.Parameters[0].Value = user.UserName;
+            command.Connection = conn;
+            if(dc.executeChangeQuery(command, conn))
+            {
+                return true;
+            }
+            return false;
+        }
+
         public bool checkPasswordForLogin(string passwordEntered, User user)
         {
             try
