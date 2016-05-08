@@ -37,6 +37,10 @@
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1510.2205\lib\net40\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="Npgsql, Version=3.0.7.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.3.0.7\lib\net45\Npgsql.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.3.2.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
@@ -59,8 +63,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Database\CryptoHandler\CryptoHandler.cs" />
+    <Compile Include="Database\DatabaseConnectionHandler\DatabaseConnectionHandler.cs" />
     <Compile Include="Database\DeckDatabase\Controller\DeckDatabaseController.cs" />
     <Compile Include="Database\UserDatabase\Controller\UserDatabaseController.cs" />
+    <Compile Include="Datatypes\Card.cs" />
+    <Compile Include="Datatypes\Deck.cs" />
+    <Compile Include="Datatypes\User.cs" />
     <Compile Include="GlobalVariables\GlobalVariables.cs" />
     <Compile Include="Interface\HearthstoneAPI\Controller\HearthstoneAPIController.cs" />
     <Compile Include="UserInterface\DeckCreatorWindow\DeckCreatorWindow.xaml.cs">
