@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 
-namespace Hearthstone_Deckbuilder.Database.CryptoHandler
+namespace Hearthstone_Deckbuilder.Database.NSCryptoHandler
 {
     public class CryptoHandler
     {

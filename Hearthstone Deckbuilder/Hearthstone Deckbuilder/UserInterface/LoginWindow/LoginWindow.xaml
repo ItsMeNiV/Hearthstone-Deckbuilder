@@ -1,4 +1,4 @@
-﻿<Window x:Class="Hearthstone_Deckbuilder.UserInterface.LoginWindow.LoginWindow"
+﻿<Window x:Class="Hearthstone_Deckbuilder.UserInterface.NSLoginWindow.LoginWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="LoginWindow" Height="300" Width="300">

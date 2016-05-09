@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Hearthstone_Deckbuilder.UserInterface.LoginWindow
+namespace Hearthstone_Deckbuilder.UserInterface.NSLoginWindow
 {
     /// <summary>
     /// Interaktionslogik für LoginWindow.xaml

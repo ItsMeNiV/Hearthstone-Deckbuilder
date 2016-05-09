@@ -1,8 +1,9 @@
 ﻿using System;
 using Npgsql;
 using System.Data;
+using Hearthstone_Deckbuilder.NSGlobalVariables;
 
-namespace Hearthstone_Deckbuilder.Database.DatabaseConnector
+namespace Hearthstone_Deckbuilder.Database.NSDatabaseConnector
 {
     public class DatabaseConnectionHandler
     {
@@ -11,7 +12,7 @@ namespace Hearthstone_Deckbuilder.Database.DatabaseConnector
         {
             try
             {
-                string connectionString = GlobalVariables.GlobalVariables.POSTGRE_CONNECTION_STRING;
+                string connectionString = GlobalVariables.POSTGRE_CONNECTION_STRING;
                 NpgsqlConnection connection = new NpgsqlConnection(connectionString);
                 connection.Open();
                 return connection;

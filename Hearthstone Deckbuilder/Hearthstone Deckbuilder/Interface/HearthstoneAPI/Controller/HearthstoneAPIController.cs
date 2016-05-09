@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hearthstone_Deckbuilder.Interface.HearthstoneAPI.Controller
+namespace Hearthstone_Deckbuilder.Interface.HearthstoneAPI.NSController
 {
     public class HearthstoneAPIController
     {

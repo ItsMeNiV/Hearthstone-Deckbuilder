@@ -1,20 +1,26 @@
 ﻿using System;
 using System.Data;
 using System.Security.Cryptography;
-using Hearthstone_Deckbuilder.Datatypes;
+using Hearthstone_Deckbuilder.NSDatatypes;
 using Npgsql;
+using Hearthstone_Deckbuilder.Database.NSCryptoHandler;
+using Hearthstone_Deckbuilder.Database.NSDatabaseConnector;
 
-namespace Hearthstone_Deckbuilder.Database.UserDatabase.Controller
+namespace Hearthstone_Deckbuilder.Database.NSUserDatabase.Controller
 {
     public class UserDatabaseController
     {
+        DatabaseConnectionHandler _dc;
+        public UserDatabaseController()
+        {
+            _dc = new DatabaseConnectionHandler();
+        }
 
         public bool createNewUser(string username, string plainTextPassword)
         {
-            byte[] passwordSalt = CryptoHandler.CryptoHandler.generatePasswordSalt();
-            string passwordHash = CryptoHandler.CryptoHandler.hashPassword(plainTextPassword, passwordSalt);
-            DatabaseConnector.DatabaseConnectionHandler dc = new DatabaseConnector.DatabaseConnectionHandler();
-            NpgsqlConnection conn = dc.connectToDatabase();
+            byte[] passwordSalt = CryptoHandler.generatePasswordSalt();
+            string passwordHash = CryptoHandler.hashPassword(plainTextPassword, passwordSalt);
+            NpgsqlConnection conn = _dc.connectToDatabase();
             conn.CreateCommand();
             NpgsqlCommand command = new NpgsqlCommand("insert into DBUser values(:value1, :value2, :value3)", conn);
             command.Parameters.Add(new NpgsqlParameter("value1", DbType.String));
@@ -24,7 +30,7 @@ namespace Hearthstone_Deckbuilder.Database.UserDatabase.Controller
             command.Parameters[1].Value = passwordHash;
             command.Parameters[2].Value = Convert.ToBase64String(passwordSalt);
             command.Connection = conn;
-            if (dc.executeChangeQuery(command, conn))
+            if (_dc.executeChangeQuery(command, conn))
             {
                 return true;
             }
@@ -33,20 +39,19 @@ namespace Hearthstone_Deckbuilder.Database.UserDatabase.Controller
 
         public User getUser(string username)
         {
-            DatabaseConnector.DatabaseConnectionHandler dc = new DatabaseConnector.DatabaseConnectionHandler();
-            NpgsqlConnection conn = dc.connectToDatabase();
+            NpgsqlConnection conn = _dc.connectToDatabase();
             conn.CreateCommand();
             NpgsqlCommand command = new NpgsqlCommand("select * from DBUser where username = :value1", conn);
             command.Parameters.Add(new NpgsqlParameter("value1", DbType.String));
             command.Parameters[0].Value = username;
             command.Connection = conn;
-            DataTable result = dc.executeSelectQuery(command, conn);
+            DataTable result = _dc.executeSelectQuery(command, conn);
             User user = new User();
             if (result != null)
             {
-                user.UserName = result.Rows[0].ItemArray[0].ToString();
-                user.PasswordHash = result.Rows[0].ItemArray[1].ToString();
-                user.PasswordSalt = result.Rows[0].ItemArray[2].ToString();
+                user.userName = result.Rows[0].ItemArray[0].ToString();
+                user.passwordHash = result.Rows[0].ItemArray[1].ToString();
+                user.passwordSalt = result.Rows[0].ItemArray[2].ToString();
             }
             else
             {
@@ -57,20 +62,19 @@ namespace Hearthstone_Deckbuilder.Database.UserDatabase.Controller
 
         public bool updateUserPassword(User user, string newPassword)
         {
-            DatabaseConnector.DatabaseConnectionHandler dc = new DatabaseConnector.DatabaseConnectionHandler();
-            NpgsqlConnection conn = dc.connectToDatabase();
+            NpgsqlConnection conn = _dc.connectToDatabase();
             conn.CreateCommand();
-            byte[] passwordSalt = CryptoHandler.CryptoHandler.generatePasswordSalt();
-            string passwordHash = CryptoHandler.CryptoHandler.hashPassword(newPassword, passwordSalt);
+            byte[] passwordSalt = CryptoHandler.generatePasswordSalt();
+            string passwordHash = CryptoHandler.hashPassword(newPassword, passwordSalt);
             NpgsqlCommand command = new NpgsqlCommand("update DBUser set passwordhash = :value1, passwordsalt = :value2 where username = :value3");
             command.Parameters.Add(new NpgsqlParameter("value1", DbType.String));
             command.Parameters.Add(new NpgsqlParameter("value2", DbType.String));
             command.Parameters.Add(new NpgsqlParameter("value3", DbType.String));
             command.Parameters[0].Value = passwordHash;
             command.Parameters[1].Value = Convert.ToBase64String(passwordSalt);
-            command.Parameters[2].Value = user.UserName;
+            command.Parameters[2].Value = user.userName;
             command.Connection = conn;
-            if (dc.executeChangeQuery(command, conn))
+            if (_dc.executeChangeQuery(command, conn))
             {
                 return true;
             }
@@ -79,14 +83,13 @@ namespace Hearthstone_Deckbuilder.Database.UserDatabase.Controller
 
         public bool deleteUser(User user)
         {
-            DatabaseConnector.DatabaseConnectionHandler dc = new DatabaseConnector.DatabaseConnectionHandler();
-            NpgsqlConnection conn = dc.connectToDatabase();
+            NpgsqlConnection conn = _dc.connectToDatabase();
             conn.CreateCommand();
             NpgsqlCommand command = new NpgsqlCommand("delete from DBUser where username = :value1");
             command.Parameters.Add(new NpgsqlParameter("value1", DbType.String));
-            command.Parameters[0].Value = user.UserName;
+            command.Parameters[0].Value = user.userName;
             command.Connection = conn;
-            if(dc.executeChangeQuery(command, conn))
+            if(_dc.executeChangeQuery(command, conn))
             {
                 return true;
             }
@@ -97,7 +100,7 @@ namespace Hearthstone_Deckbuilder.Database.UserDatabase.Controller
         {
             try
             {
-                byte[] hashBytes = Convert.FromBase64String(user.PasswordHash);
+                byte[] hashBytes = Convert.FromBase64String(user.passwordHash);
                 byte[] salt = new byte[16];
                 Array.Copy(hashBytes, 0, salt, 0, 16);
                 var pbkdf2 = new Rfc2898DeriveBytes(passwordEntered, salt, 10000);
