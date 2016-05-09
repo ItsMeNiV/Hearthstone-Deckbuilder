@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1510.2205\lib\net40\Moq.dll</HintPath>
     </Reference>
@@ -63,6 +66,8 @@
     <Compile Include="Database\UserDatabase\Controller\UserDatabaseController.cs" />
     <Compile Include="GlobalVariables\GlobalVariables.cs" />
     <Compile Include="Interface\HearthstoneAPI\Controller\HearthstoneAPIController.cs" />
+    <Compile Include="Interface\HearthstoneAPI\Controller\HearthstoneAPIControllerBO.cs" />
+    <Compile Include="Interface\HearthstoneAPI\Controller\HearthstoneAPIControllerMap.cs" />
     <Compile Include="UserInterface\DeckCreatorWindow\DeckCreatorWindow.xaml.cs">
       <DependentUpon>DeckCreatorWindow.xaml</DependentUpon>
     </Compile>

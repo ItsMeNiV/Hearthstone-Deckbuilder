@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Hearthstone_Deckbuilder.GlobalVariables;
+using AutoMapper;
+using Hearthstone_Deckbuilder.Interface.HearthstoneAPI.Controller;
 
 namespace Hearthstone_Deckbuilder
 {
