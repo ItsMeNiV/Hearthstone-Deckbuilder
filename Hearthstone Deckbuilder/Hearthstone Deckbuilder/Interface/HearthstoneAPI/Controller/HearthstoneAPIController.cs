@@ -8,12 +8,17 @@ namespace Hearthstone_Deckbuilder.Interface.HearthstoneAPI.Controller
 {
     public class HearthstoneAPIController
     {
-        private string _attackValue;
+        private string _cardAttackValue;
+        private string _cardCostValue;
+        private string _cardHealthValue;
+        private string _cardNameValue;
+        private string _cardQualityValue;
+        private string _cardTypeValue;
+        private string _cardSetValue;
+        private string _classValue;
         private string _collectibleValue;
-        private string _costValue;
-        private string _durabilityValue;
-        private string _healthValue;
         private string _localeValue;
+
 
         protected string CollectibleValue
         {
@@ -25,28 +30,52 @@ namespace Hearthstone_Deckbuilder.Interface.HearthstoneAPI.Controller
             set { _localeValue = "enUs"; }
         }
 
-        public string AttackValue
+        public string CardAttackValue
         {
-            get { return _attackValue; }
-            set { _attackValue = value; }
+            get { return _cardAttackValue; }
+            set { _cardAttackValue = value; }
         }
 
-        public string CostValue
+        public string CardCostValue
         {
-            get { return _costValue; }
-            set { _costValue = value; }
+            get { return _cardCostValue; }
+            set { _cardCostValue = value; }
         }
 
-        public string DurabilityValue
+        public string CardHealthValue
         {
-            get { return _durabilityValue; }
-            set { _durabilityValue = value; }
+            get { return _cardHealthValue; }
+            set { _cardHealthValue = value; }
         }
 
-        public string HealthValue
+        public string CardNameValue
         {
-            get { return _healthValue; }
-            set { _healthValue = value; }
+            get { return _cardNameValue; }
+            set { _cardNameValue = value; }
+        }
+
+        public string CardQualityValue
+        {
+            get { return _cardQualityValue; }
+            set { _cardQualityValue = value; }
+        }
+
+        public string CardTypeValue
+        {
+            get { return _cardTypeValue; }
+            set { _cardTypeValue = value; }
+        }
+
+        public string CardSetValue
+        {
+            get { return _cardSetValue; }
+            set { _cardSetValue = value; }
+        }
+
+        public string ClassValue
+        {
+            get { return _classValue; }
+            set { _classValue = value; }
         }
     }
 }
