@@ -61,6 +61,7 @@
     </ApplicationDefinition>
     <Compile Include="Database\DeckDatabase\Controller\DeckDatabaseController.cs" />
     <Compile Include="Database\UserDatabase\Controller\UserDatabaseController.cs" />
+    <Compile Include="GlobalVariables\GlobalVariables.cs" />
     <Compile Include="Interface\HearthstoneAPI\Controller\HearthstoneAPIController.cs" />
     <Compile Include="UserInterface\DeckCreatorWindow\DeckCreatorWindow.xaml.cs">
       <DependentUpon>DeckCreatorWindow.xaml</DependentUpon>
