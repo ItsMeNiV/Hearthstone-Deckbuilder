@@ -15,8 +15,8 @@ namespace Unit_Tests.Database.CryptoHandler
         [Test]
         public void TestHashPassword()
         {
-            byte[] salt = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
-            string hash = Hearthstone_Deckbuilder.Database.NSCryptoHandler.CryptoHandler.hashPassword("testpassword", salt);
+            byte[] salt = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+            string hash = Hearthstone_Deckbuilder.Database.NSCryptoHandler.CryptoHandler.HashPassword("testpassword", salt);
 
             Assert.AreEqual("AQIDBAUGBwgJCgsMDQ4PEDMExIlNeHf5GUIXz8A7DU8NRnzl", hash);
         }
@@ -24,8 +24,8 @@ namespace Unit_Tests.Database.CryptoHandler
         [Test]
         public void TestGenerateSaltIsReallyRandom()
         {
-            byte[] salt = Hearthstone_Deckbuilder.Database.NSCryptoHandler.CryptoHandler.generatePasswordSalt();
-            Assert.AreNotEqual(salt, Hearthstone_Deckbuilder.Database.NSCryptoHandler.CryptoHandler.generatePasswordSalt());
+            byte[] salt = Hearthstone_Deckbuilder.Database.NSCryptoHandler.CryptoHandler.GeneratePasswordSalt();
+            Assert.AreNotEqual(salt, Hearthstone_Deckbuilder.Database.NSCryptoHandler.CryptoHandler.GeneratePasswordSalt());
         }
 
     }

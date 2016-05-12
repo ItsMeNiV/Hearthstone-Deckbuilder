@@ -1,36 +1,37 @@
 ﻿using System;
-using Npgsql;
 using System.Data;
 using Hearthstone_Deckbuilder.NSGlobalVariables;
+using Npgsql;
 
 namespace Hearthstone_Deckbuilder.Database.NSDatabaseConnector
 {
     public class DatabaseConnectionHandler
     {
-
-        public NpgsqlConnection connectToDatabase()
+        public NpgsqlConnection ConnectToDatabase()
         {
             try
             {
-                string connectionString = GlobalVariables.POSTGRE_CONNECTION_STRING;
+                string connectionString = GlobalVariables.PostgreConnectionString;
                 NpgsqlConnection connection = new NpgsqlConnection(connectionString);
                 connection.Open();
                 return connection;
-            } catch(Exception ex)
+            } 
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return null;
             }
         }
 
-        public DataTable executeSelectQuery(NpgsqlCommand command, NpgsqlConnection conn)
+        public DataTable ExecuteSelectQuery(NpgsqlCommand command, NpgsqlConnection conn)
         {
             try
             {
-                if(conn == null)
+                if (conn == null)
                 {
                     return null;
                 }
+
                 DataTable dataTable = new DataTable();
                 DataSet dataSet = new DataSet();
                 NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter(command);
@@ -39,19 +40,16 @@ namespace Hearthstone_Deckbuilder.Database.NSDatabaseConnector
                 dataTable = dataSet.Tables[0];
                 conn.Close();
 
-                if(dataTable.Rows.Count <= 0)
-                {
-                    return null;
-                }
-                return dataTable;
-            } catch(NpgsqlException ex)
+                return dataTable.Rows.Count <= 0 ? null : dataTable;
+            } 
+            catch (NpgsqlException ex)
             {
                 Console.WriteLine(ex.Message);
                 return null;
             }
         }
 
-        public bool executeChangeQuery(NpgsqlCommand command, NpgsqlConnection conn)
+        public bool ExecuteChangeQuery(NpgsqlCommand command, NpgsqlConnection conn)
         {
             try
             {
@@ -59,11 +57,13 @@ namespace Hearthstone_Deckbuilder.Database.NSDatabaseConnector
                 {
                     return false;
                 }
+
                 if (command.ExecuteNonQuery() == 0)
                 {
                     conn.Close();
                     return false;
                 }
+
                 conn.Close();
                 return true;
             }
@@ -73,6 +73,5 @@ namespace Hearthstone_Deckbuilder.Database.NSDatabaseConnector
                 return false;
             }
         }
-
     }
 }

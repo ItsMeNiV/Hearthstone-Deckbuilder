@@ -1,103 +1,105 @@
-﻿using Hearthstone_Deckbuilder.NSDatatypes;
-using Npgsql;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System;
-using Hearthstone_Deckbuilder.Database.NSUserDatabase.Controller;
 using Hearthstone_Deckbuilder.Database.NSDatabaseConnector;
+using Hearthstone_Deckbuilder.Database.NSUserDatabase.Controller;
+using Hearthstone_Deckbuilder.NSDatatypes;
+using Npgsql;
 
 namespace Hearthstone_Deckbuilder.Database.NSDeckDatabase.Controller
 {
-    class DeckDatabaseController
+    public class DeckDatabaseController
     {
-
-        DatabaseConnectionHandler _dc;
+        private readonly DatabaseConnectionHandler databaseConnection;
 
         public DeckDatabaseController()
         {
-            _dc = new DatabaseConnectionHandler();
+            databaseConnection = new DatabaseConnectionHandler();
         }
 
-        public bool createNewDeck(string deckname, User user)
+        public bool CreateNewDeck(string deckname, User user)
         {
-            NpgsqlConnection conn = _dc.connectToDatabase();
+            NpgsqlConnection conn = databaseConnection.ConnectToDatabase();
             conn.CreateCommand();
             NpgsqlCommand command = new NpgsqlCommand("insert into dbdeck(deckname, username) values(:value1, :value2)", conn);
             command.Parameters.Add(new NpgsqlParameter("value1", DbType.String));
             command.Parameters.Add(new NpgsqlParameter("value2", DbType.String));
             command.Parameters[0].Value = deckname;
-            command.Parameters[1].Value = user.userName;
+            command.Parameters[1].Value = user.UserName;
             command.Connection = conn;
-            if (_dc.executeChangeQuery(command, conn))
+            if (databaseConnection.ExecuteChangeQuery(command, conn))
             {
                 return true;
             }
+
             return false;
         }
 
-        public bool addCardsToDeck(List<Card> cardList, Deck deck)
+        public bool AddCardsToDeck(List<Card> cardList, Deck deck)
         {
             string sqlQuery = "insert into dbcardtodeck(deckid, cardid) values ";
             foreach (Card c in cardList)
             {
-                sqlQuery += "('" + deck.deckId + "', '" + c.cardId + "'), ";
+                sqlQuery += "('" + deck.DeckId + "', '" + c.CardId + "'), ";
             }
+
             sqlQuery = sqlQuery.Substring(0, sqlQuery.Length - 2);
-            NpgsqlConnection conn = _dc.connectToDatabase();
+            NpgsqlConnection conn = databaseConnection.ConnectToDatabase();
             conn.CreateCommand();
             NpgsqlCommand command = new NpgsqlCommand(sqlQuery, conn);
             command.Connection = conn;
-            if (_dc.executeChangeQuery(command, conn))
+            if (databaseConnection.ExecuteChangeQuery(command, conn))
             {
                 return true;
             }
+
             return false;
         }
 
-        public Deck getDeckById(string deckId)
+        public Deck GetDeckById(string deckId)
         {
             Deck returnDeck = new Deck();
-            NpgsqlConnection conn = _dc.connectToDatabase();
+            NpgsqlConnection conn = databaseConnection.ConnectToDatabase();
             conn.CreateCommand();
             NpgsqlCommand command = new NpgsqlCommand("select * from dbdeck where deckid = :value1", conn);
             command.Parameters.Add(new NpgsqlParameter("value1", DbType.String));
             command.Parameters[0].Value = deckId;
             command.Connection = conn;
-            DataTable result = _dc.executeSelectQuery(command, conn);
+            DataTable result = databaseConnection.ExecuteSelectQuery(command, conn);
             if (result != null)
             {
                 UserDatabaseController udc = new UserDatabaseController();
-                returnDeck.deckId = deckId;
-                returnDeck.deckName = result.Rows[0].ItemArray[1].ToString();
-                returnDeck.deckUser = udc.getUser(result.Rows[0].ItemArray[2].ToString());
-                conn = _dc.connectToDatabase();
+                returnDeck.DeckId = deckId;
+                returnDeck.DeckName = result.Rows[0].ItemArray[1].ToString();
+                returnDeck.DeckUser = udc.GetUser(result.Rows[0].ItemArray[2].ToString());
+                conn = databaseConnection.ConnectToDatabase();
                 conn.CreateCommand();
                 command = new NpgsqlCommand("select deckid, cardid, cardtodeckid from dbcardtodeck where deckid = :value1", conn);
                 command.Parameters.Add(new NpgsqlParameter("value1", DbType.String));
                 command.Parameters[0].Value = deckId;
                 command.Connection = conn;
-                result = _dc.executeSelectQuery(command, conn);
+                result = databaseConnection.ExecuteSelectQuery(command, conn);
                 if (result != null)
                 {
                     for (int i = 0; i < result.Rows.Count; i++)
                     {
-                        returnDeck.cardList.Add(new Card(result.Rows[i].ItemArray[1].ToString(), result.Rows[i].ItemArray[2].ToString()));
+                        returnDeck.CardList.Add(new Card(result.Rows[i].ItemArray[1].ToString(), result.Rows[i].ItemArray[2].ToString()));
                     }
                 }
             }
+
             return returnDeck;
         }
 
-        public List<Deck> getAllDecksByUser(User user)
+        public List<Deck> GetAllDecksByUser(User user)
         {
             List<Deck> deckList = new List<Deck>();
-            NpgsqlConnection conn = _dc.connectToDatabase();
+            NpgsqlConnection conn = databaseConnection.ConnectToDatabase();
             conn.CreateCommand();
             NpgsqlCommand command = new NpgsqlCommand("select * from dbdeck where username = :value1", conn);
             command.Parameters.Add(new NpgsqlParameter("value1", DbType.String));
-            command.Parameters[0].Value = user.userName;
+            command.Parameters[0].Value = user.UserName;
             command.Connection = conn;
-            DataTable result = _dc.executeSelectQuery(command, conn);
+            DataTable result = databaseConnection.ExecuteSelectQuery(command, conn);
             if (result != null)
             {
                 for (int i = 0; i < result.Rows.Count; i++)
@@ -105,79 +107,85 @@ namespace Hearthstone_Deckbuilder.Database.NSDeckDatabase.Controller
                     deckList.Add(new Deck(result.Rows[i].ItemArray[0].ToString(), result.Rows[i].ItemArray[1].ToString(), user));
                 }
             }
-            conn = _dc.connectToDatabase();
+
+            conn = databaseConnection.ConnectToDatabase();
             conn.CreateCommand();
             command = new NpgsqlCommand("select ctd.deckid, ctd.cardid, ctd.cardtodeckid from dbcardtodeck as ctd join dbdeck as d on d.deckid = ctd.deckid join dbuser u on u.username = d.username where u.username = :value1", conn);
             command.Parameters.Add(new NpgsqlParameter("value1", DbType.String));
-            command.Parameters[0].Value = user.userName;
+            command.Parameters[0].Value = user.UserName;
             command.Connection = conn;
-            result = _dc.executeSelectQuery(command, conn);
+            result = databaseConnection.ExecuteSelectQuery(command, conn);
             if (result != null)
             {
                 foreach (Deck d in deckList)
                 {
                     for (int i = 0; i < result.Rows.Count; i++)
                     {
-                        if (result.Rows[i].ItemArray[0].ToString().Equals(d.deckId))
+                        if (result.Rows[i].ItemArray[0].ToString().Equals(d.DeckId))
                         {
-                            d.cardList.Add(new Card(result.Rows[i].ItemArray[1].ToString(), result.Rows[i].ItemArray[2].ToString()));
+                            d.CardList.Add(new Card(result.Rows[i].ItemArray[1].ToString(), result.Rows[i].ItemArray[2].ToString()));
                         }
                     }
                 }
             }
+
             return deckList;
         }
 
-        public bool updateDeckList(Deck updatedDeck)
+        public bool UpdateDeckList(Deck updatedDeck)
         {
-            if (hasDeckChanged(updatedDeck))
+            if (HasDeckChanged(updatedDeck))
             {
-                NpgsqlConnection conn = _dc.connectToDatabase();
+                NpgsqlConnection conn = databaseConnection.ConnectToDatabase();
                 conn.CreateCommand();
                 NpgsqlCommand command = new NpgsqlCommand("update dbdeck set deckname = :value1 where deckid = :value2", conn);
                 command.Parameters.Add(new NpgsqlParameter("value1", DbType.String));
                 command.Parameters.Add(new NpgsqlParameter("value2", DbType.String));
-                command.Parameters[0].Value = updatedDeck.deckName;
-                command.Parameters[1].Value = updatedDeck.deckId;
+                command.Parameters[0].Value = updatedDeck.DeckName;
+                command.Parameters[1].Value = updatedDeck.DeckId;
                 command.Connection = conn;
-                if (_dc.executeChangeQuery(command, conn))
+                if (databaseConnection.ExecuteChangeQuery(command, conn))
                 {
-                    conn = _dc.connectToDatabase();
+                    conn = databaseConnection.ConnectToDatabase();
                     conn.CreateCommand();
-                    //Building SQL Query
+
+                    // Building SQL Query
                     string sqlQuery = "update dbcardtodeck as ctd set cardid = c.cardid from (values ";
-                    foreach (Card c in updatedDeck.cardList)
+                    foreach (Card c in updatedDeck.CardList)
                     {
-                        sqlQuery += "('" + c.cardToDeckId + "', '" + c.cardId + "'), ";
+                        sqlQuery += "('" + c.CardToDeckId + "', '" + c.CardId + "'), ";
                     }
+
                     sqlQuery = sqlQuery.Substring(0, sqlQuery.Length - 2);
                     sqlQuery += ") as c(cardtodeckid, cardid) where c.cardtodeckid = ctd.cardtodeckid";
 
                     command = new NpgsqlCommand(sqlQuery, conn);
                     command.Connection = conn;
-                    if (_dc.executeChangeQuery(command, conn))
+                    if (databaseConnection.ExecuteChangeQuery(command, conn))
                     {
                         return true;
                     }
                 }
             }
+
             return false;
         }
 
-        private bool hasDeckChanged(Deck updatedDeck)
+        private bool HasDeckChanged(Deck updatedDeck)
         {
-            Deck deckOnDB = getDeckById(updatedDeck.deckId);
-            if (deckOnDB.deckName.Equals(updatedDeck.deckName))
+            Deck deckOnDB = GetDeckById(updatedDeck.DeckId);
+            if (deckOnDB.DeckName.Equals(updatedDeck.DeckName))
             {
-                if (updatedDeck.cardList.Count == deckOnDB.cardList.Count)
+                if (updatedDeck.CardList.Count == deckOnDB.CardList.Count)
                 {
                     int index = 0;
-                    foreach (Card c in deckOnDB.cardList)
+                    foreach (Card c in deckOnDB.CardList)
                     {
-                        if (!c.cardId.Equals(updatedDeck.cardList[index].cardId))
+                        if (!c.CardId.Equals(updatedDeck.CardList[index].CardId))
                         {
                             return true;
                         }
+
                         index++;
                     }
                 }
@@ -190,6 +198,7 @@ namespace Hearthstone_Deckbuilder.Database.NSDeckDatabase.Controller
             {
                 return true;
             }
+
             return false;
         }
     }

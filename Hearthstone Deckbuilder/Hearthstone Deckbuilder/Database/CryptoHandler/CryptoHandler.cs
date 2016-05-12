@@ -5,8 +5,7 @@ namespace Hearthstone_Deckbuilder.Database.NSCryptoHandler
 {
     public class CryptoHandler
     {
-
-        public static string hashPassword(string plainTextPassword, byte[] passwordSalt)
+        public static string HashPassword(string plainTextPassword, byte[] passwordSalt)
         {
             var pbkdf2 = new Rfc2898DeriveBytes(plainTextPassword, passwordSalt, 10000);
             byte[] hash = pbkdf2.GetBytes(20);
@@ -16,12 +15,11 @@ namespace Hearthstone_Deckbuilder.Database.NSCryptoHandler
             return Convert.ToBase64String(passwordHash);
         }
 
-        public static byte[] generatePasswordSalt()
+        public static byte[] GeneratePasswordSalt()
         {
             byte[] salt;
             new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
             return salt;
         }
-
     }
 }

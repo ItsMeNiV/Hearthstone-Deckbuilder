@@ -1,28 +1,30 @@
 ﻿using System.Collections.Generic;
+
 namespace Hearthstone_Deckbuilder.NSDatatypes
 {
     public class Deck
     {
-
         public Deck()
         {
-            cardList = new List<Card>();
-            deckUser = new User();
+            CardList = new List<Card>();
+            DeckUser = new User();
         }
 
         public Deck(string deckId, string deckName, User deckUser)
         {
-            this.deckId = deckId;
-            this.deckName = deckName;
-            this.deckUser = deckUser;
-            cardList = new List<Card>();
-            deckUser = new User();
+            CardList = new List<Card>();
+            DeckId = deckId;
+            DeckName = deckName;
+            DeckUser = deckUser;
+            DeckUser = new User();
         }
 
-        public List<Card> cardList { get; set; }
-        public string deckName { get; set; }
-        public User deckUser { get; set; }
-        public string deckId { get; set; }
+        public List<Card> CardList { get; set; }
 
+        public string DeckId { get; set; }
+
+        public string DeckName { get; set; }
+
+        public User DeckUser { get; set; }
     }
 }

@@ -8,6 +8,5 @@ namespace Hearthstone_Deckbuilder.Interface.HearthstoneAPI.NSController
 {
     public class HearthstoneAPIController
     {
-
     }
 }

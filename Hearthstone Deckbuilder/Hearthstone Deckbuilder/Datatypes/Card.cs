@@ -2,23 +2,25 @@
 {
     public class Card
     {
-
         public Card(string cardId, string cardToDeckId)
         {
-            this.cardId = cardId;
-            this.cardToDeckId = cardToDeckId;
+            CardId = cardId;
+            CardToDeckId = cardToDeckId;
         }
 
         public Card(string cardId)
         {
-            this.cardId = cardId;
+            CardId = cardId;
         }
 
-        public string cardId { get; set; }
-        public string cardName { get; set; }
-        public int manaCost { get; set; }
-        public string cardText { get; set; }
-        public string cardToDeckId { get; set; }
+        public string CardId { get; set; }
 
+        public string CardName { get; set; }
+
+        public int ManaCost { get; set; }
+
+        public string CardText { get; set; }
+
+        public string CardToDeckId { get; set; }
     }
 }
