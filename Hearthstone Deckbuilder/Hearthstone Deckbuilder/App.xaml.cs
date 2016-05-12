@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
-using Hearthstone_Deckbuilder.GlobalVariables;
-using AutoMapper;
-using Hearthstone_Deckbuilder.Interface.HearthstoneAPI.Controller;
 
 namespace Hearthstone_Deckbuilder
 {
@@ -21,8 +13,8 @@ namespace Hearthstone_Deckbuilder
             base.OnStartup(e);
             if (e.Args.Length == 2)
             {
-                GlobalVariables.GlobalVariables.API_KEY = e.Args[0].ToString();
-                GlobalVariables.GlobalVariables.POSTGRE_CONNECTION_STRING = e.Args[1].ToString();
+                GlobalVariables.GlobalVariables.API_KEY = e.Args[0];
+                GlobalVariables.GlobalVariables.POSTGRE_CONNECTION_STRING = e.Args[1];
             }
             else
             {

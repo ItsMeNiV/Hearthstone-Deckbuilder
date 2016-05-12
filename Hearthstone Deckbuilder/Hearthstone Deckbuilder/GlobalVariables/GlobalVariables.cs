@@ -8,9 +8,7 @@ namespace Hearthstone_Deckbuilder.GlobalVariables
 {
     class GlobalVariables
     {
-
         public static string API_KEY;
         public static string POSTGRE_CONNECTION_STRING;
-
     }
 }
