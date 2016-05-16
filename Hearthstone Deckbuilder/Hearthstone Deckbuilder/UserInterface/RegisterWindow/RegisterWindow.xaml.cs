@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Hearthstone_Deckbuilder.UserInterface.RegisterWindow
+namespace Hearthstone_Deckbuilder.UserInterface.NSRegisterWindow
 {
     /// <summary>
     /// Interaktionslogik für RegisterWindow.xaml
