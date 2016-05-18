@@ -1,19 +1,107 @@
 ﻿<Window x:Class="Hearthstone_Deckbuilder.UserInterface.MainWindow.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="700" Width="1020">
+        Title="MainWindow" Height="700" Width="1100">
     <Grid>
-        <Menu DockPanel.Dock="Top" Margin="10,0,10,599">
-            <MenuItem Header="New Deck" Click="MenuItem_Click"/>
-            <MenuItem Header="Settings"/>
-            <MenuItem Header="Exit"/>
-        </Menu>
-        <ListView x:Name="lvwCardList" HorizontalAlignment="Left" Height="589" Margin="10,30,0,0" VerticalAlignment="Top" Width="993">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <TabControl>
+            <TabItem Header="Home">
+                <Menu DockPanel.Dock="Top" Margin="10,0,10,599">
+                    <MenuItem Header="New Deck" Click="MenuItem_Click"/>
+                    <MenuItem Header="Settings"/>
+                    <MenuItem Header="Exit"/>
+                </Menu>
+            </TabItem>
+            <TabItem Header="Card Gallery">
+                <Grid>
+                    <ComboBox x:Name="cmbClass" Margin="0,10,850,0" VerticalAlignment="Top" IsReadOnly="True" Height="30" HorizontalAlignment="Right" Width="150">
+                        <ComboBoxItem>Basic</ComboBoxItem>
+                        <ComboBoxItem>Blackrock Mountain</ComboBoxItem>
+                        <ComboBoxItem>Classic</ComboBoxItem>
+                        <ComboBoxItem>Goblins vs Gnomes</ComboBoxItem>
+                        <ComboBoxItem>Grand Tournament</ComboBoxItem>
+                        <ComboBoxItem>League of Explorers</ComboBoxItem>
+                        <ComboBoxItem>Naxxramas</ComboBoxItem>
+                        <ComboBoxItem>Whisper of the Old Gods</ComboBoxItem>
+                    </ComboBox>
+                    <ComboBox x:Name="cmbEdition" Margin="0,10,628,0" VerticalAlignment="Top" IsReadOnly="True" Height="30" HorizontalAlignment="Right" Width="150">
+                        <ComboBoxItem>Basic</ComboBoxItem>
+                        <ComboBoxItem>Blackrock Mountain</ComboBoxItem>
+                        <ComboBoxItem>Classic</ComboBoxItem>
+                        <ComboBoxItem>Goblins vs Gnomes</ComboBoxItem>
+                        <ComboBoxItem>Grand Tournament</ComboBoxItem>
+                        <ComboBoxItem>League of Explorers</ComboBoxItem>
+                        <ComboBoxItem>Naxxramas</ComboBoxItem>
+                        <ComboBoxItem>Whisper of the Old Gods</ComboBoxItem>
+                    </ComboBox>
+                    <ComboBox x:Name="cmbManaCost" Margin="82,45,0,0" VerticalAlignment="Top" IsReadOnly="True" Height="30" HorizontalAlignment="Left" Width="150">
+                        <ComboBoxItem>0</ComboBoxItem>
+                        <ComboBoxItem>1</ComboBoxItem>
+                        <ComboBoxItem>2</ComboBoxItem>
+                        <ComboBoxItem>3</ComboBoxItem>
+                        <ComboBoxItem>4</ComboBoxItem>
+                        <ComboBoxItem>5</ComboBoxItem>
+                        <ComboBoxItem>6</ComboBoxItem>
+                        <ComboBoxItem>7</ComboBoxItem>
+                        <ComboBoxItem>8+</ComboBoxItem>
+                    </ComboBox>
+                    <ListView x:Name="listView" Height="500" Margin="10,160,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="1070">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Height="30" Margin="19,102,0,0" TextWrapping="Wrap" Text="Search..." VerticalAlignment="Top" Width="213"/>
+                    <Button x:Name="btnApply" Content="Apply Filter" Margin="861,102,0,0" VerticalAlignment="Top" Height="30" HorizontalAlignment="Left" Width="100"/>
+                    <Button x:Name="btnReset" Content="Reset Filter" Margin="979,102,0,0" VerticalAlignment="Top" Height="30" HorizontalAlignment="Left" Width="100"/>
+                    <ComboBox x:Name="cmbAttack" Margin="304,45,0,0" VerticalAlignment="Top" IsReadOnly="True" Height="30" HorizontalAlignment="Left" Width="150">
+                        <ComboBoxItem Content="1"/>
+                        <ComboBoxItem Content="2"/>
+                        <ComboBoxItem Content="3"/>
+                        <ComboBoxItem Content="4"/>
+                        <ComboBoxItem Content="5"/>
+                        <ComboBoxItem Content="6"/>
+                        <ComboBoxItem Content="7"/>
+                        <ComboBoxItem Content="8+"/>
+                    </ComboBox>
+                    <ComboBox x:Name="cmbType" Margin="525,10,0,0" VerticalAlignment="Top" IsReadOnly="True" Height="30" HorizontalAlignment="Left" Width="150">
+                        <ComboBoxItem Content="Minion"/>
+                        <ComboBoxItem Content="Spell"/>
+                        <ComboBoxItem Content="Weapon"/>
+                    </ComboBox>
+                    <ComboBox x:Name="cmbHealth" Margin="525,45,0,0" VerticalAlignment="Top" IsReadOnly="True" Height="30" HorizontalAlignment="Left" Width="150">
+                        <ComboBoxItem Content="1"/>
+                        <ComboBoxItem Content="2"/>
+                        <ComboBoxItem Content="3"/>
+                        <ComboBoxItem Content="4"/>
+                        <ComboBoxItem Content="5"/>
+                        <ComboBoxItem Content="6"/>
+                        <ComboBoxItem Content="7"/>
+                        <ComboBoxItem Content="8+" AllowDrop="False"/>
+                    </ComboBox>
+                    <Label x:Name="lblType" Content="Type" HorizontalAlignment="Left" Margin="475,10,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lblHealth" Content="Health" HorizontalAlignment="Left" Margin="475,45,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lblManaCost" Content="Mana Cost" HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lblSet" Content="Set" HorizontalAlignment="Left" Margin="252,10,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lblAttack" Content="Attack" HorizontalAlignment="Left" Margin="252,49,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cmbRarity" Margin="763,10,0,0" VerticalAlignment="Top" IsReadOnly="True" Height="30" HorizontalAlignment="Left" Width="150">
+                        <ComboBoxItem Content="Common"/>
+                        <ComboBoxItem Content="Rare"/>
+                        <ComboBoxItem Content="Epic"/>
+                        <ComboBoxItem Content="Legendary"/>
+                    </ComboBox>
+                    <ComboBox x:Name="cmbDurability" Margin="763,45,0,0" VerticalAlignment="Top" IsReadOnly="True" Height="30" HorizontalAlignment="Left" Width="150">
+                        <ComboBoxItem Content="1"/>
+                        <ComboBoxItem Content="2"/>
+                        <ComboBoxItem Content="3"/>
+                        <ComboBoxItem Content="4"/>
+                        <ComboBoxItem Content="5+"/>
+                    </ComboBox>
+                    <Label x:Name="lblRarity" Content="Rarity" HorizontalAlignment="Left" Margin="697,10,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lblDurability" Content="Durability" HorizontalAlignment="Left" Margin="697,45,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lblClass" Content="Class" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
