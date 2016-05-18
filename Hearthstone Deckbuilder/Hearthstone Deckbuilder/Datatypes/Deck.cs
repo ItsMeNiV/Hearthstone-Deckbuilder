@@ -10,13 +10,13 @@ namespace Hearthstone_Deckbuilder.NSDatatypes
             DeckUser = new User();
         }
 
-        public Deck(string deckId, string deckName, User deckUser)
+        public Deck(string deckId, string deckName, User deckUser, string deckClass)
         {
             CardList = new List<Card>();
             DeckId = deckId;
             DeckName = deckName;
             DeckUser = deckUser;
-            DeckUser = new User();
+            DeckClass = deckClass;
         }
 
         public List<Card> CardList { get; set; }
@@ -26,5 +26,7 @@ namespace Hearthstone_Deckbuilder.NSDatatypes
         public string DeckName { get; set; }
 
         public User DeckUser { get; set; }
+
+        public string DeckClass { get; set; }
     }
 }

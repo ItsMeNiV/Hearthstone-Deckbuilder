@@ -122,7 +122,7 @@ namespace Hearthstone_Deckbuilder.Database.NSDeckDatabase.Controller
             {
                 for (int i = 0; i < result.Rows.Count; i++)
                 {
-                    deckList.Add(new Deck(result.Rows[i].ItemArray[0].ToString(), result.Rows[i].ItemArray[1].ToString(), user));
+                    deckList.Add(new Deck(result.Rows[i].ItemArray[0].ToString(), result.Rows[i].ItemArray[1].ToString(), user, result.Rows[i].ItemArray[2].ToString()));
                 }
             }
 
