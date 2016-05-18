@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Windows;
 using Hearthstone_Deckbuilder.NSGlobalVariables;
-using Hearthstone_Deckbuilder.Database.NSCardDatabase.Controller;
-using System.Collections.Generic;
-using Hearthstone_Deckbuilder.NSDatatypes;
 
 namespace Hearthstone_Deckbuilder
 {
@@ -25,9 +22,6 @@ namespace Hearthstone_Deckbuilder
                 Console.WriteLine("Wrong Usage.\nPlease add the API Key and the Postgre Connection String to the debug commandline arguments");
                 Shutdown();
             }
-
-            CardDatabaseController cdc = new CardDatabaseController();
-            Card card = cdc.GetCardByName("Wisp");
         }
     }
 }

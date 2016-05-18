@@ -55,24 +55,6 @@ namespace Hearthstone_Deckbuilder.Database.NSDeckDatabase.Controller
             return false;
         }
 
-        public bool AddCardToDeck(Card card, Deck deck)
-        {
-            NpgsqlConnection conn = databaseConnection.ConnectToDatabase();
-            conn.CreateCommand();
-            NpgsqlCommand command = new NpgsqlCommand("insert into dbcardtodeck(deckid, cardid) values(:value1, :value2)", conn);
-            command.Parameters.Add(new NpgsqlParameter("value1", DbType.String));
-            command.Parameters.Add(new NpgsqlParameter("value2", DbType.String));
-            command.Parameters[0].Value = card.CardId;
-            command.Parameters[1].Value = deck.DeckId;
-            command.Connection = conn;
-            if (databaseConnection.ExecuteChangeQuery(command, conn))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
         public Deck GetDeckById(string deckId)
         {
             Deck returnDeck = new Deck();

@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database\CryptoHandler\CryptoHandlerTest.cs" />
+    <Compile Include="Database\UserDatabase\Controller\UserDatabaseControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,7 +68,6 @@
   <ItemGroup>
     <Folder Include="Database\DatabaseConnectionHandler\" />
     <Folder Include="Database\DeckDatabase\Controller\" />
-    <Folder Include="Database\UserDatabase\Controller\" />
     <Folder Include="Interface\HearthstoneAPI\Controller\" />
   </ItemGroup>
   <ItemGroup>
