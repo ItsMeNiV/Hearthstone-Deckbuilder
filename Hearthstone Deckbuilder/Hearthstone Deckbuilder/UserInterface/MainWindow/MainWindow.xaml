@@ -1,8 +1,19 @@
 ﻿<Window x:Class="Hearthstone_Deckbuilder.UserInterface.MainWindow.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="300" Width="300">
+        Title="MainWindow" Height="700" Width="1020">
     <Grid>
-        
+        <Menu DockPanel.Dock="Top" Margin="10,0,10,599">
+            <MenuItem Header="New Deck" Click="MenuItem_Click"/>
+            <MenuItem Header="Settings"/>
+            <MenuItem Header="Exit"/>
+        </Menu>
+        <ListView x:Name="lvwCardList" HorizontalAlignment="Left" Height="589" Margin="10,30,0,0" VerticalAlignment="Top" Width="993">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

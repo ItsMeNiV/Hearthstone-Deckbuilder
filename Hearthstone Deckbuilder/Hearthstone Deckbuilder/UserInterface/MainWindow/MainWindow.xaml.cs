@@ -23,5 +23,11 @@ namespace Hearthstone_Deckbuilder.UserInterface.MainWindow
         {
             InitializeComponent();
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            DeckCreatorWindow.DeckCreatorWindow deckCreatorWindow = new DeckCreatorWindow.DeckCreatorWindow();
+            deckCreatorWindow.ShowDialog();
+        }
     }
 }
