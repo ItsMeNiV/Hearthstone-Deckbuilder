@@ -245,37 +245,40 @@ namespace Hearthstone_Deckbuilder.Database.NSCardDatabase.Controller
                 {
                     durability = Convert.ToInt32(dataTable.Rows[i].ItemArray[9]);
                 }
-                string imgLink = getImgLink(name);
 
-                returnCardList.Add(new Card(id, name, manacost, cardtext, attack, health, type, rarity, cardclass, durability, imgLink));
+                returnCardList.Add(new Card(id, name, manacost, cardtext, attack, health, type, rarity, cardclass, durability));
             }
             return returnCardList;
         }
 
-        private string getImgLink(string cardName)
+        public void addImgLinkToCardsInCardlist(List<Card> cardList)
         {
-            string jsonstring;
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://omgvamp-hearthstone-v1.p.mashape.com/cards/" + cardName + "?collectible=1&locale=enUS");
-            request.Headers["X-Mashape-Key"] = GlobalVariables.ApiKey;
-            request.Accept = "application/json";
-            WebResponse response = request.GetResponse();
-            using (Stream responseStream = response.GetResponseStream())
+            foreach (Card c in cardList)
             {
-                StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
-                jsonstring = reader.ReadToEnd();
-            }
-            JArray json = JArray.Parse(jsonstring);
-            string imgLink = string.Empty;
-            foreach (dynamic token in json.Children().Children())
-            {
-                string tokenname = token.Name;
-                if (tokenname.Equals("img"))
+                string cardName = c.CardName;
+                string jsonstring;
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://omgvamp-hearthstone-v1.p.mashape.com/cards/" + cardName + "?collectible=1&locale=enUS");
+                request.Headers["X-Mashape-Key"] = GlobalVariables.ApiKey;
+                request.Accept = "application/json";
+                WebResponse response = request.GetResponse();
+                using (Stream responseStream = response.GetResponseStream())
                 {
-                    imgLink = token.First;
-                    break;
+                    StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+                    jsonstring = reader.ReadToEnd();
                 }
+                JArray json = JArray.Parse(jsonstring);
+                string imgLink = string.Empty;
+                foreach (dynamic token in json.Children().Children())
+                {
+                    string tokenname = token.Name;
+                    if (tokenname.Equals("img"))
+                    {
+                        imgLink = token.First;
+                        break;
+                    }
+                }
+                c.ImgLink = imgLink;
             }
-            return imgLink;
         }
 
     }

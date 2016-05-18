@@ -13,7 +13,7 @@
             CardId = cardId;
         }
 
-        public Card(string cardId, string cardName, int manaCost, string cardText, int attack, int health, string cardType, string rarity, string cardClass, int durability, string imgLink)
+        public Card(string cardId, string cardName, int manaCost, string cardText, int attack, int health, string cardType, string rarity, string cardClass, int durability)
         {
             CardId = cardId;
             CardName = cardName;
@@ -25,7 +25,6 @@
             Rarity = rarity;
             CardClass = cardClass;
             Durability = durability;
-            ImgLink = imgLink;
         }
 
         public string CardId { get; set; }
