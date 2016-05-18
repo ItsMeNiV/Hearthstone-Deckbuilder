@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Hearthstone_Deckbuilder.UserInterface.NSDeckCreatorWindow;
+using Hearthstone_Deckbuilder.UserInterface.ClassSelectorWindow.Controller;
 
 namespace Hearthstone_Deckbuilder.UserInterface.ClassSelectorWindow
 {
@@ -21,17 +22,17 @@ namespace Hearthstone_Deckbuilder.UserInterface.ClassSelectorWindow
     public partial class ClassSelectorWindow : Window
     {
         private string _classSelected;
+        private ClassSelectorWindowController controller;
 
         public ClassSelectorWindow()
         {
+            controller = new ClassSelectorWindowController();
             InitializeComponent();
         }
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
-            DeckCreatorWindow _deckCreatorWindow = new DeckCreatorWindow();
-            _deckCreatorWindow.Show();
-            Close();
+            controller.openDeckCreatorAndCloseClassSelector(this, _classSelected);
         }
 
         public string ClassSelected

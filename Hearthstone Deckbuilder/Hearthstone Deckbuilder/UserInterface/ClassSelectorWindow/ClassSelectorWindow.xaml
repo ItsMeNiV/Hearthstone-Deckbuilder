@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="ClassSelectorWindow" Height="300" Width="450">
     <Grid>
-        <ComboBox x:Name="cmbClass" Margin="131,77,-19,0" VerticalAlignment="Top" IsReadOnly="True" Text="Class" Height="40" HorizontalAlignment="Left" Width="180">
+        <ComboBox x:Name="cmbClass" Margin="131,77,-19,0" VerticalAlignment="Top" IsReadOnly="True" Text="Class" Height="40" HorizontalAlignment="Left" Width="180" SelectedIndex="0">
             <ComboBoxItem Content="Druid"/>
             <ComboBoxItem Content="Hunter"/>
             <ComboBoxItem Content="Mage"/>

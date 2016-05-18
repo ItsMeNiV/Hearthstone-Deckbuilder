@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hearthstone_Deckbuilder.UserInterface.NSLoginWindow.Controller;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,20 +20,49 @@ namespace Hearthstone_Deckbuilder.UserInterface.NSLoginWindow
     /// </summary>
     public partial class LoginWindow : Window
     {
+        LoginWindowController controller;
+
         public LoginWindow()
         {
+            controller = new LoginWindowController();
             InitializeComponent();
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            if (txtRegisterPassword.Text == txtRegisterPasswordConfirmed.Text)
+            if (txtRegisterPassword.Text == txtRegisterPasswordConfirmed.Text && !txtRegisterUsername.Text.Equals("") && !txtRegisterPassword.Text.Equals(""))
             {
-                // Register User
+                if(controller.register(txtRegisterUsername.Text, txtRegisterPassword.Text))
+                {
+                    txtRegisterPassword.Text = "";
+                    txtRegisterPasswordConfirmed.Text = "";
+                    txtRegisterUsername.Text = "";
+                    btnRegister.IsEnabled = false;
+                    MessageBox.Show("Successfully registered!");
+                }
             }
             else
             {
                 MessageBox.Show("Passwords are not matching");
+            }
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            if(!txtLoginUsername.Text.Equals("") && !txtLoginPassword.Text.Equals(""))
+            {
+                if(controller.login(txtLoginUsername.Text, txtLoginPassword.Text))
+                {
+                    controller.openMainWindowAndCloseLoginWindow(this);
+                }
+                else
+                {
+                    MessageBox.Show("Wrong user password combination");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please enter a username and a password");
             }
         }
     }

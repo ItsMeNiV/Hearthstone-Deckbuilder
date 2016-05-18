@@ -105,6 +105,7 @@
     <Compile Include="UserInterface\ClassSelectorWindow\ClassSelectorWindow.xaml.cs">
       <DependentUpon>ClassSelectorWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserInterface\ClassSelectorWindow\Controller\ClassSelectorWindowController.cs" />
     <Compile Include="UserInterface\DeckCreatorWindow\Controller\DeckCreatorWindowController.cs" />
     <Compile Include="UserInterface\DeckCreatorWindow\DeckCreatorWindow.xaml.cs">
       <DependentUpon>DeckCreatorWindow.xaml</DependentUpon>

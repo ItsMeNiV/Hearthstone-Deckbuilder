@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Hearthstone_Deckbuilder.NSDatatypes;
+using Hearthstone_Deckbuilder.UserInterface.NSMainWindow.Controller;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,16 @@ namespace Hearthstone_Deckbuilder.UserInterface.NSMainWindow
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        MainWindowController controller;
+
         public MainWindow()
         {
+            controller = new MainWindowController();
             InitializeComponent();
+            InitializeDeckList();
+            InitializeCardGallery();
+
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -33,6 +42,65 @@ namespace Hearthstone_Deckbuilder.UserInterface.NSMainWindow
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void InitializeDeckList()
+        {
+            foreach(Deck deck in controller.getDecksOfLoggedInUser())
+            {
+                lvwDeckList.Items.Add(deck.DeckName);
+            }
+        }
+
+        private void InitializeCardGallery()
+        {
+            foreach(Card card in controller.getCurrentCardList())
+            {
+                lvwCardList.Items.Add(card.CardName);
+            }
+        }
+
+        private void btnApply_Click(object sender, RoutedEventArgs e)
+        {
+            controller.applyFilters(cmbClass.Text, cmbType.Text, cmbRarity.Text, Convert.ToInt32(cmbManaCost.Text), Convert.ToInt32(cmbAttack.Text), Convert.ToInt32(cmbHealth.Text), Convert.ToInt32(cmbDurability.Text));
+            lvwCardList.Items.Clear();
+            foreach (Card card in controller.getCurrentCardList())
+            {
+                lvwCardList.Items.Add(card.CardName);
+            }
+        }
+
+        private void btnReset_Click(object sender, RoutedEventArgs e)
+        {
+            controller.resetFilters();
+            foreach (Card card in controller.getCurrentCardList())
+            {
+                lvwCardList.Items.Add(card.CardName);
+            }
+        }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            controller.resetFilters();
+            if (!txtSearch.Text.Equals(""))
+            {
+                controller.searchCards(txtSearch.Text);
+                lvwCardList.Items.Clear();
+                foreach (Card card in controller.getCurrentCardList())
+                {
+                    lvwCardList.Items.Add(card.CardName);
+                }
+            }
+        }
+
+        private void ListViewItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var item = sender as ListViewItem;
+            if (item != null && item.IsSelected)
+            {
+                Card card = controller.getCardByName(item.Content.ToString());
+                imgCardImage.Source = new BitmapImage(new Uri(card.ImgLink));
+            }
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Hearthstone_Deckbuilder.UserInterface.NSLoginWindow.Controller
         public bool login(string enteredUsername, string enteredPassword)
         {
             User user = userDatabaseController.GetUser(enteredUsername);
-            if (!user.PasswordHash.Equals(null))
+            if (!(user.PasswordHash == null))
             {
                 if (userDatabaseController.CheckPasswordForLogin(enteredPassword, user))
                 {
@@ -45,7 +45,7 @@ namespace Hearthstone_Deckbuilder.UserInterface.NSLoginWindow.Controller
 
         public bool register(string enteredUsername, string enteredPassword)
         {
-            if (userDatabaseController.GetUser(enteredUsername).PasswordHash.Equals(null))
+            if (userDatabaseController.GetUser(enteredUsername).PasswordHash == null)
             {
                 if(userDatabaseController.CreateNewUser(enteredUsername, enteredPassword))
                 {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hearthstone_Deckbuilder.UserInterface.NSDeckCreatorWindow.Controller;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,8 +20,13 @@ namespace Hearthstone_Deckbuilder.UserInterface.NSDeckCreatorWindow
     /// </summary>
     public partial class DeckCreatorWindow : Window
     {
+
+        private DeckCreatorWindowController controller;
+        private string SelectedClass;
+
         public DeckCreatorWindow()
         {
+            controller = new DeckCreatorWindowController();
             InitializeComponent();
         }
 
@@ -32,6 +38,11 @@ namespace Hearthstone_Deckbuilder.UserInterface.NSDeckCreatorWindow
         private void btnReset_Click(object sender, RoutedEventArgs e)
         {
             lvwCardList.Items.Clear();
+        }
+        
+        public void setClass(string selectedClass)
+        {
+            SelectedClass = selectedClass;
         }
     }
 }
