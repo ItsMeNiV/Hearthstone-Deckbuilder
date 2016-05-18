@@ -18,7 +18,7 @@
             <ComboBoxItem Content="Warlock"/>
             <ComboBoxItem Content="Warrior"/>
         </ComboBox>
-        <Label x:Name="lblSelectClass" Content="Select a Class" VerticalAlignment="Top" Margin="171,25,0,0" Height="41" HorizontalAlignment="Left" Width="100"/>
+        <Label x:Name="lblSelectClass" Content="Select a Class" VerticalAlignment="Top" Margin="180,25,181,0" Height="41"/>
         <Button x:Name="btnConfirm" Content="Confirm" Margin="184,166,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="75" Click="btnConfirm_Click"/>
 
     </Grid>
