@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Hearthstone_Deckbuilder.UserInterface.NSLoginWindow
+namespace Hearthstone_Deckbuilder.UserInterface.NSRegisterWindow
 {
     /// <summary>
-    /// Interaktionslogik für LoginWindow.xaml
+    /// Interaktionslogik für RegisterWindow.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class RegisterWindow : Window
     {
-        public LoginWindow()
+        public RegisterWindow()
         {
             InitializeComponent();
         }

@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Hearthstone_Deckbuilder.UserInterface.DeckCreatorWindow
+namespace Hearthstone_Deckbuilder.UserInterface.NSDeckCreatorWindow
 {
     /// <summary>
     /// Interaktionslogik für DeckCreatorWindow.xaml

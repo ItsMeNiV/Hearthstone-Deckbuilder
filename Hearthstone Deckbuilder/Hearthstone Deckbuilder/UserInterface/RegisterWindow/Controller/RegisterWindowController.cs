@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hearthstone_Deckbuilder.Interface.HearthstoneAPI.NSController
+namespace Hearthstone_Deckbuilder.UserInterface.RegisterWindow.Controller
 {
-    public class HearthstoneAPIController
+    class RegisterWindowController
     {
     }
 }
