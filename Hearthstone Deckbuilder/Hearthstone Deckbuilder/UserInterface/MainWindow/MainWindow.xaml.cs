@@ -29,5 +29,10 @@ namespace Hearthstone_Deckbuilder.UserInterface.MainWindow
             ClassSelectorWindow.ClassSelectorWindow classSelectorWindow = new ClassSelectorWindow.ClassSelectorWindow();
             classSelectorWindow.ShowDialog();
         }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

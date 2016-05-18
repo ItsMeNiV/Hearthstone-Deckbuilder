@@ -8,7 +8,7 @@
                 <Menu DockPanel.Dock="Top" Margin="10,0,10,599">
                     <MenuItem Header="New Deck" Click="MenuItem_Click"/>
                     <MenuItem Header="Settings"/>
-                    <MenuItem Header="Exit"/>
+                    <MenuItem Header="Exit" Click="MenuItem_Click_1"/>
                 </Menu>
             </TabItem>
             <TabItem Header="Card Gallery">
