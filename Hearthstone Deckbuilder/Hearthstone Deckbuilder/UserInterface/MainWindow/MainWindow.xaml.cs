@@ -26,8 +26,8 @@ namespace Hearthstone_Deckbuilder.UserInterface.NSMainWindow
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            DeckCreatorWindow.DeckCreatorWindow deckCreatorWindow = new DeckCreatorWindow.DeckCreatorWindow();
-            deckCreatorWindow.ShowDialog();
+            ClassSelectorWindow.ClassSelectorWindow classSelectorWindow = new ClassSelectorWindow.ClassSelectorWindow();
+            classSelectorWindow.ShowDialog();
         }
     }
 }

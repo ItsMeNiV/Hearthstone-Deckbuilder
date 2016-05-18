@@ -102,6 +102,9 @@
     <Compile Include="Datatypes\User.cs" />
     <Compile Include="GlobalVariables\GlobalVariables.cs" />
     <Compile Include="Interface\HearthstoneAPI\Controller\HearthstoneAPIController.cs" />
+    <Compile Include="UserInterface\ClassSelectorWindow\ClassSelectorWindow.xaml.cs">
+      <DependentUpon>ClassSelectorWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserInterface\DeckCreatorWindow\Controller\DeckCreatorWindowController.cs" />
     <Compile Include="UserInterface\DeckCreatorWindow\DeckCreatorWindow.xaml.cs">
       <DependentUpon>DeckCreatorWindow.xaml</DependentUpon>
@@ -118,6 +121,10 @@
     <Compile Include="UserInterface\MainWindow\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="UserInterface\ClassSelectorWindow\ClassSelectorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserInterface\DeckCreatorWindow\DeckCreatorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
