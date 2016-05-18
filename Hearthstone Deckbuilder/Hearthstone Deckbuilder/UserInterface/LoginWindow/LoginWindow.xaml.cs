@@ -23,5 +23,17 @@ namespace Hearthstone_Deckbuilder.UserInterface.NSLoginWindow
         {
             InitializeComponent();
         }
+
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtRegisterPassword.Text == txtRegisterPasswordConfirmed.Text)
+            {
+                // Register User
+            }
+            else
+            {
+                MessageBox.Show("Passwords are not matching");
+            }
+        }
     }
 }

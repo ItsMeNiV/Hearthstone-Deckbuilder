@@ -23,5 +23,15 @@ namespace Hearthstone_Deckbuilder.UserInterface.NSDeckCreatorWindow
         {
             InitializeComponent();
         }
+
+        private void btnApply_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnReset_Click(object sender, RoutedEventArgs e)
+        {
+            lvwCardList.Items.Clear();
+        }
     }
 }

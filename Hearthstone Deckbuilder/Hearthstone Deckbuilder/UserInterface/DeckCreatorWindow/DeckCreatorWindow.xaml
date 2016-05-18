@@ -26,7 +26,7 @@
                     <ComboBoxItem>7</ComboBoxItem>
                     <ComboBoxItem>8+</ComboBoxItem>
                 </ComboBox>
-                <ListView x:Name="listView" Height="500" Margin="10,160,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="1070">
+                <ListView x:Name="lvwCardList" Height="500" Margin="10,160,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="1070">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn/>
@@ -34,8 +34,8 @@
                     </ListView.View>
                 </ListView>
                 <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Height="30" Margin="700,45,0,0" TextWrapping="Wrap" Text="Search..." VerticalAlignment="Top" Width="213"/>
-                <Button x:Name="btnApply" Content="Apply Filter" Margin="861,102,0,0" VerticalAlignment="Top" Height="30" HorizontalAlignment="Left" Width="100"/>
-                <Button x:Name="btnReset" Content="Reset Filter" Margin="979,102,0,0" VerticalAlignment="Top" Height="30" HorizontalAlignment="Left" Width="100"/>
+                <Button x:Name="btnApply" Content="Apply Filter" Margin="861,102,0,0" VerticalAlignment="Top" Height="30" HorizontalAlignment="Left" Width="100" Click="btnApply_Click"/>
+                <Button x:Name="btnReset" Content="Reset Filter" Margin="979,102,0,0" VerticalAlignment="Top" Height="30" HorizontalAlignment="Left" Width="100" Click="btnReset_Click"/>
                 <ComboBox x:Name="cmbAttack" Margin="304,45,0,0" VerticalAlignment="Top" IsReadOnly="True" Height="30" HorizontalAlignment="Left" Width="150">
                     <ComboBoxItem Content="1"/>
                     <ComboBoxItem Content="2"/>

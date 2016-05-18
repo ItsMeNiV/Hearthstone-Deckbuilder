@@ -5,11 +5,20 @@
     <Grid>
         <TabControl>
             <TabItem Header="Home">
-                <Menu DockPanel.Dock="Top" Margin="10,0,10,599">
-                    <MenuItem Header="New Deck" Click="MenuItem_Click"/>
-                    <MenuItem Header="Settings"/>
-                    <MenuItem Header="Exit"/>
-                </Menu>
+                <Grid>
+                    <Menu DockPanel.Dock="Top" Margin="10,0,10,599">
+                        <MenuItem Header="New Deck" Click="MenuItem_Click"/>
+                        <MenuItem Header="Settings"/>
+                        <MenuItem Header="Exit" Click="MenuItem_Click_1"/>
+                    </Menu>
+                    <ListView x:Name="lvwDeckList" Margin="10,39,10,10">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
             </TabItem>
             <TabItem Header="Card Gallery">
                 <Grid>
