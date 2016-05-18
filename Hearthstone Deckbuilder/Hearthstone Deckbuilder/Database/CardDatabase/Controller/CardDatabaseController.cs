@@ -245,40 +245,11 @@ namespace Hearthstone_Deckbuilder.Database.NSCardDatabase.Controller
                 {
                     durability = Convert.ToInt32(dataTable.Rows[i].ItemArray[9]);
                 }
+                string imgLink = dataTable.Rows[i].ItemArray[10].ToString();
 
-                returnCardList.Add(new Card(id, name, manacost, cardtext, attack, health, type, rarity, cardclass, durability));
+                returnCardList.Add(new Card(id, name, manacost, cardtext, attack, health, type, rarity, cardclass, durability, imgLink));
             }
             return returnCardList;
-        }
-
-        public void addImgLinkToCardsInCardlist(List<Card> cardList)
-        {
-            foreach (Card c in cardList)
-            {
-                string cardName = c.CardName;
-                string jsonstring;
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://omgvamp-hearthstone-v1.p.mashape.com/cards/" + cardName + "?collectible=1&locale=enUS");
-                request.Headers["X-Mashape-Key"] = GlobalVariables.ApiKey;
-                request.Accept = "application/json";
-                WebResponse response = request.GetResponse();
-                using (Stream responseStream = response.GetResponseStream())
-                {
-                    StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
-                    jsonstring = reader.ReadToEnd();
-                }
-                JArray json = JArray.Parse(jsonstring);
-                string imgLink = string.Empty;
-                foreach (dynamic token in json.Children().Children())
-                {
-                    string tokenname = token.Name;
-                    if (tokenname.Equals("img"))
-                    {
-                        imgLink = token.First;
-                        break;
-                    }
-                }
-                c.ImgLink = imgLink;
-            }
         }
 
     }
