@@ -69,7 +69,7 @@ namespace Hearthstone_Deckbuilder.UserInterface.NSDeckCreatorWindow
 
         private void btnAddToDeck_Click(object sender, RoutedEventArgs e)
         {
-            if (lvwCardList.SelectedIndex != null)
+            if (lvwCardList.SelectedIndex != -1)
             {
                 Card selectedCard = controller.getCardByName(controller.getCurrentCardList().ToArray()[lvwCardList.SelectedIndex].CardName);
                 int counter = 0;
@@ -90,7 +90,7 @@ namespace Hearthstone_Deckbuilder.UserInterface.NSDeckCreatorWindow
 
         private void btnRemoveFromDeck_Click(object sender, RoutedEventArgs e)
         {
-            if (lvwDeckCardList.SelectedIndex != null)
+            if (lvwDeckCardList.SelectedIndex != -1)
             {
                 Card selectedCard = controller.getCardByName(controller.getCurrentCardList().ToArray()[lvwDeckCardList.SelectedIndex].CardName);
                 controller.removeCardFromDeck(selectedCard, openDeck);
@@ -109,6 +109,7 @@ namespace Hearthstone_Deckbuilder.UserInterface.NSDeckCreatorWindow
                     openDeck.CardList.Add(controller.getCardByName(cardName));
                 }
                 controller.saveDeck(openDeck);
+                this.Close();
             }
             else
             {

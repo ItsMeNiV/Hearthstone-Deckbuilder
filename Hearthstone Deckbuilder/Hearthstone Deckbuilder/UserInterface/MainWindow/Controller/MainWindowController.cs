@@ -40,7 +40,9 @@ namespace Hearthstone_Deckbuilder.UserInterface.NSMainWindow.Controller
 
         public List<Deck> getDecksOfLoggedInUser()
         {
-            return deckDatabaseController.GetAllDecksByUser(GlobalVariables.LoggedInUser);
+            List<Deck> deckList = deckDatabaseController.GetAllDecksByUser(GlobalVariables.LoggedInUser);
+            deckList.Reverse();
+            return deckList;
         }
 
         public List<Card> getCurrentCardList()
@@ -176,6 +178,11 @@ namespace Hearthstone_Deckbuilder.UserInterface.NSMainWindow.Controller
         public Card getCardById(string cardId)
         {
             return cardDatabaseController.getCardById(cardId);
+        }
+
+        public void deleteSelectedDeck(Deck deck)
+        {
+            deckDatabaseController.deleteDeck(deck);
         }
 
     }

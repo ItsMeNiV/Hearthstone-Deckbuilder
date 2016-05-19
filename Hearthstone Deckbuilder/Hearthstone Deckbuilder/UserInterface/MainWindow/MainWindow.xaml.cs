@@ -121,5 +121,27 @@ namespace Hearthstone_Deckbuilder.UserInterface.NSMainWindow
             }
         }
 
+        private void btnDeleteDeck_Click(object sender, RoutedEventArgs e)
+        {
+            if (lvwDeckList.SelectedIndex != -1)
+            {
+                controller.deleteSelectedDeck(controller.getDecksOfLoggedInUser().ToArray()[lvwDeckList.SelectedIndex]);
+                lvwDeckList.Items.Clear();
+                foreach (Deck deck in controller.getDecksOfLoggedInUser())
+                {
+                    lvwDeckList.Items.Add(deck.DeckName);
+                }
+            }
+        }
+
+        private void btnRefreshDeckList_Click(object sender, RoutedEventArgs e)
+        {
+            lvwDeckList.Items.Clear();
+            foreach (Deck deck in controller.getDecksOfLoggedInUser())
+            {
+                lvwDeckList.Items.Add(deck.DeckName);
+            }
+        }
+
     }
 }
