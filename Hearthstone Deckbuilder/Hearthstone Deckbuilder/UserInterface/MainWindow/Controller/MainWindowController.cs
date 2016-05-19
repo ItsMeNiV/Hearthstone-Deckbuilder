@@ -33,11 +33,6 @@ namespace Hearthstone_Deckbuilder.UserInterface.NSMainWindow.Controller
             deckCreatorWindow.Show();
         }
 
-        public void openSettingsWindow()
-        {
-
-        }
-
         public List<Deck> getDecksOfLoggedInUser()
         {
             List<Deck> deckList = deckDatabaseController.GetAllDecksByUser(GlobalVariables.LoggedInUser);
@@ -183,6 +178,11 @@ namespace Hearthstone_Deckbuilder.UserInterface.NSMainWindow.Controller
         public void deleteSelectedDeck(Deck deck)
         {
             deckDatabaseController.deleteDeck(deck);
+        }
+
+        public List<Card> getCardsOfDeck(Deck deck)
+        {
+            return cardDatabaseController.getAllCardsOfDeck(deck);
         }
 
     }

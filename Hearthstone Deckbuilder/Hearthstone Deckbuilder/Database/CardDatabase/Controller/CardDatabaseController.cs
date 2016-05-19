@@ -31,7 +31,9 @@ namespace Hearthstone_Deckbuilder.Database.NSCardDatabase.Controller
             Card returnCard = new Card(cardId);
             NpgsqlConnection conn = databaseConnection.ConnectToDatabase();
             conn.CreateCommand();
-            NpgsqlCommand command = new NpgsqlCommand("select * from dbcard", conn);
+            NpgsqlCommand command = new NpgsqlCommand("select * from dbcard where cardid = :value1", conn);
+            command.Parameters.Add(new NpgsqlParameter("value1", DbType.String));
+            command.Parameters[0].Value = cardId;
             command.Connection = conn;
             DataTable result = databaseConnection.ExecuteSelectQuery(command, conn);
             if (result != null)
@@ -78,6 +80,26 @@ namespace Hearthstone_Deckbuilder.Database.NSCardDatabase.Controller
             {
                 return null;
             }
+        }
+
+        public List<Card> getAllCardsOfDeck(Deck deck)
+        {
+            List<Card> cardList = new List<Card>();
+            NpgsqlConnection conn = databaseConnection.ConnectToDatabase();
+            conn.CreateCommand();
+            NpgsqlCommand command = new NpgsqlCommand("select * from dbcardtodeck where deckid = :value1", conn);
+            command.Parameters.Add(new NpgsqlParameter("value1", DbType.String));
+            command.Parameters[0].Value = deck.DeckId;
+            command.Connection = conn;
+            DataTable result = databaseConnection.ExecuteSelectQuery(command, conn);
+            if (result != null)
+            {
+                for (int i = 0; i < result.Rows.Count; i++)
+                {
+                    cardList.Add(getCardById(result.Rows[i].ItemArray[1].ToString()));
+                }
+            }
+            return cardList;
         }
 
         public List<Card> GetCardsByManacost(int manacost)

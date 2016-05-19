@@ -113,7 +113,7 @@ namespace Hearthstone_Deckbuilder.UserInterface.NSMainWindow
                 newDeck.DeckName = selectedDeck.DeckName;
                 newDeck.DeckUser = selectedDeck.DeckUser;
                 newDeck.DeckClass = selectedDeck.DeckClass;
-                foreach (Card card in selectedDeck.CardList)
+                foreach (Card card in controller.getCardsOfDeck(newDeck))
                 {
                     newDeck.CardList.Add(controller.getCardById(card.CardId));
                 }
