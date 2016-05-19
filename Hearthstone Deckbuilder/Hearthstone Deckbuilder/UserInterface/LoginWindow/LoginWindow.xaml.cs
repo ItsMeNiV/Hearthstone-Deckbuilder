@@ -30,12 +30,12 @@ namespace Hearthstone_Deckbuilder.UserInterface.NSLoginWindow
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            if (txtRegisterPassword.Text == txtRegisterPasswordConfirmed.Text && !txtRegisterUsername.Text.Equals("") && !txtRegisterPassword.Text.Equals(""))
+            if (txtRegisterPassword.Password == txtRegisterPasswordConfirmed.Password && !txtRegisterUsername.Text.Equals("") && !txtRegisterPassword.Password.Equals(""))
             {
-                if(controller.register(txtRegisterUsername.Text, txtRegisterPassword.Text))
+                if (controller.register(txtRegisterUsername.Text, txtRegisterPassword.Password))
                 {
-                    txtRegisterPassword.Text = "";
-                    txtRegisterPasswordConfirmed.Text = "";
+                    txtRegisterPassword.Password = "";
+                    txtRegisterPasswordConfirmed.Password = "";
                     txtRegisterUsername.Text = "";
                     btnRegister.IsEnabled = false;
                     MessageBox.Show("Successfully registered!");
@@ -49,9 +49,9 @@ namespace Hearthstone_Deckbuilder.UserInterface.NSLoginWindow
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            if(!txtLoginUsername.Text.Equals("") && !txtLoginPassword.Text.Equals(""))
+            if (!txtLoginUsername.Text.Equals("") && !txtLoginPassword.Password.Equals(""))
             {
-                if(controller.login(txtLoginUsername.Text, txtLoginPassword.Text))
+                if (controller.login(txtLoginUsername.Text, txtLoginPassword.Password))
                 {
                     controller.openMainWindowAndCloseLoginWindow(this);
                 }

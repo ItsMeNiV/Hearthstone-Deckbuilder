@@ -10,7 +10,7 @@
                     <Label x:Name="lblLoginPassword" Content="Password:" HorizontalAlignment="Left" Margin="30,90,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="lblLoginUsername" Content="Username:" HorizontalAlignment="Left" Margin="30,30,0,0" VerticalAlignment="Top"/>
                     <TextBox x:Name="txtLoginUsername" HorizontalAlignment="Left" Height="23" Margin="30,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145"/>
-                    <TextBox x:Name="txtLoginPassword" HorizontalAlignment="Left" Height="23" Margin="30,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145"/>
+                    <PasswordBox x:Name="txtLoginPassword" HorizontalAlignment="Left" Height="23" Margin="30,115,0,0" VerticalAlignment="Top" Width="145" PasswordChar="*"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Register" Name="RegisterTab">
@@ -19,9 +19,9 @@
                     <Label x:Name="lblRegisterPassword" Content="Password:" HorizontalAlignment="Left" Margin="30,69,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="lblRegisterUsername" Content="Username:" HorizontalAlignment="Left" Margin="30,10,0,0" VerticalAlignment="Top"/>
                     <TextBox x:Name="txtRegisterUsername" HorizontalAlignment="Left" Height="23" Margin="30,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145"/>
-                    <TextBox x:Name="txtRegisterPassword" HorizontalAlignment="Left" Height="23" Margin="30,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145"/>
+                    <PasswordBox x:Name="txtRegisterPassword" HorizontalAlignment="Left" Height="23" Margin="30,100,0,0" VerticalAlignment="Top" Width="145" PasswordChar="*"/>
                     <Label x:Name="lblRegisterPasswordConfirmed" Content="Confirm Password:" HorizontalAlignment="Left" Margin="30,128,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="txtRegisterPasswordConfirmed" HorizontalAlignment="Left" Height="23" Margin="30,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145"/>
+                    <PasswordBox x:Name="txtRegisterPasswordConfirmed" HorizontalAlignment="Left" Height="23" Margin="30,159,0,0" VerticalAlignment="Top" Width="145" PasswordChar="*"/>
                 </Grid>
             </TabItem>
         </TabControl>

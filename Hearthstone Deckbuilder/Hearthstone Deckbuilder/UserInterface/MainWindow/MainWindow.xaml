@@ -6,22 +6,29 @@
         <TabControl>
             <TabItem Header="Home">
                 <Grid>
-                    <Menu DockPanel.Dock="Top" Margin="10,0,10,599">
+                    <Menu DockPanel.Dock="Top" Margin="10,0,10,643">
                         <MenuItem Header="New Deck" Click="MenuItem_Click"/>
                         <MenuItem Header="Exit" Click="MenuItem_Click_1"/>
                     </Menu>
-                    <ListView x:Name="lvwDeckList" Margin="10,39,10,10">
+                    <Label x:Name="lblMyDecks" Content="My Decks" Margin="10,28,-10,-28" FontSize="25"/>
+                    <ListView x:Name="lvwDeckList" Margin="10,82,10,10">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn/>
                             </GridView>
                         </ListView.View>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItemDeck_PreviewMouseLeftButtonDown" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
                     </ListView>
                 </Grid>
             </TabItem>
             <TabItem Header="Card Gallery">
                 <Grid>
                     <ComboBox x:Name="cmbClass" Margin="0,10,860,0" VerticalAlignment="Top" IsReadOnly="True" Height="30" HorizontalAlignment="Right" Width="150" SelectedIndex="0">
+                        <ComboBoxItem>None</ComboBoxItem>
                         <ComboBoxItem>Basic</ComboBoxItem>
                         <ComboBoxItem>Blackrock Mountain</ComboBoxItem>
                         <ComboBoxItem>Classic</ComboBoxItem>
@@ -32,6 +39,7 @@
                         <ComboBoxItem>Whisper of the Old Gods</ComboBoxItem>
                     </ComboBox>
                     <ComboBox x:Name="cmbManaCost" Margin="82,45,0,0" VerticalAlignment="Top" IsReadOnly="True" Height="30" HorizontalAlignment="Left" Width="150" SelectedIndex="0">
+                        <ComboBoxItem>None</ComboBoxItem>
                         <ComboBoxItem>0</ComboBoxItem>
                         <ComboBoxItem>1</ComboBoxItem>
                         <ComboBoxItem>2</ComboBoxItem>
@@ -55,11 +63,13 @@
                         </ListView.ItemContainerStyle>
                     </ListView>
                     <Image x:Name="imgCardImage" Width="307" Height="465" Margin="763,160,22,46" Stretch="Fill"/>
-                    <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Height="30" Margin="19,102,0,0" TextWrapping="Wrap" Text="Search..." VerticalAlignment="Top" Width="213"/>
-                    <Button x:Name="btnApply" Content="Apply Filter" Margin="861,102,0,0" VerticalAlignment="Top" Height="30" HorizontalAlignment="Left" Width="100" Click="btnApply_Click"/>
-                    <Button x:Name="btnReset" Content="Reset Filter" Margin="979,102,0,0" VerticalAlignment="Top" Height="30" HorizontalAlignment="Left" Width="100" Click="btnReset_Click"/>
-                    <Button x:Name="btnSearch" Content="Search" Margin="252,102,0,0" VerticalAlignment="Top" Height="30" HorizontalAlignment="Left" Width="100" Click="btnSearch_Click"/>
+                    <Label x:Name="lblSearch" Content="Search" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Height="30" Margin="19,111,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="213"/>
+                    <Button x:Name="btnApply" Content="Apply Filter" Margin="861,111,0,0" VerticalAlignment="Top" Height="30" HorizontalAlignment="Left" Width="100" Click="btnApply_Click"/>
+                    <Button x:Name="btnReset" Content="Reset Filter" Margin="970,111,0,0" VerticalAlignment="Top" Height="30" HorizontalAlignment="Left" Width="100" Click="btnReset_Click"/>
+                    <Button x:Name="btnSearch" Content="Search" Margin="252,111,0,0" VerticalAlignment="Top" Height="30" HorizontalAlignment="Left" Width="100" Click="btnSearch_Click"/>
                     <ComboBox x:Name="cmbAttack" Margin="304,45,0,0" VerticalAlignment="Top" IsReadOnly="True" Height="30" HorizontalAlignment="Left" Width="150" SelectedIndex="0">
+                        <ComboBoxItem>None</ComboBoxItem>
                         <ComboBoxItem Content="1"/>
                         <ComboBoxItem Content="2"/>
                         <ComboBoxItem Content="3"/>
@@ -70,11 +80,13 @@
                         <ComboBoxItem Content="8+"/>
                     </ComboBox>
                     <ComboBox x:Name="cmbType" Margin="304,10,0,0" VerticalAlignment="Top" IsReadOnly="True" Height="30" HorizontalAlignment="Left" Width="150" SelectedIndex="0">
+                        <ComboBoxItem>None</ComboBoxItem>
                         <ComboBoxItem Content="Minion"/>
                         <ComboBoxItem Content="Spell"/>
                         <ComboBoxItem Content="Weapon"/>
                     </ComboBox>
                     <ComboBox x:Name="cmbHealth" Margin="525,45,0,0" VerticalAlignment="Top" IsReadOnly="True" Height="30" HorizontalAlignment="Left" Width="150" SelectedIndex="0">
+                        <ComboBoxItem>None</ComboBoxItem>
                         <ComboBoxItem Content="1"/>
                         <ComboBoxItem Content="2"/>
                         <ComboBoxItem Content="3"/>
@@ -89,12 +101,14 @@
                     <Label x:Name="lblManaCost" Content="Mana Cost" HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="lblAttack" Content="Attack" HorizontalAlignment="Left" Margin="252,49,0,0" VerticalAlignment="Top"/>
                     <ComboBox x:Name="cmbRarity" Margin="525,10,0,0" VerticalAlignment="Top" IsReadOnly="True" Height="30" HorizontalAlignment="Left" Width="150" SelectedIndex="0">
+                        <ComboBoxItem>None</ComboBoxItem>
                         <ComboBoxItem Content="Common"/>
                         <ComboBoxItem Content="Rare"/>
                         <ComboBoxItem Content="Epic"/>
                         <ComboBoxItem Content="Legendary"/>
                     </ComboBox>
                     <ComboBox x:Name="cmbDurability" Margin="763,45,0,0" VerticalAlignment="Top" IsReadOnly="True" Height="30" HorizontalAlignment="Left" Width="150" SelectedIndex="0">
+                        <ComboBoxItem>None</ComboBoxItem>
                         <ComboBoxItem Content="1"/>
                         <ComboBoxItem Content="2"/>
                         <ComboBoxItem Content="3"/>

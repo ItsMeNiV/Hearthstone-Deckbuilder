@@ -62,7 +62,7 @@ namespace Hearthstone_Deckbuilder.UserInterface.NSMainWindow
 
         private void btnApply_Click(object sender, RoutedEventArgs e)
         {
-            controller.applyFilters(cmbClass.Text, cmbType.Text, cmbRarity.Text, Convert.ToInt32(cmbManaCost.Text), Convert.ToInt32(cmbAttack.Text), Convert.ToInt32(cmbHealth.Text), Convert.ToInt32(cmbDurability.Text));
+            controller.applyFilters(cmbClass.Text, cmbType.Text, cmbRarity.Text, cmbManaCost.Text, cmbAttack.Text, cmbHealth.Text, cmbDurability.Text);
             lvwCardList.Items.Clear();
             foreach (Card card in controller.getCurrentCardList())
             {
@@ -102,5 +102,24 @@ namespace Hearthstone_Deckbuilder.UserInterface.NSMainWindow
                 imgCardImage.Source = new BitmapImage(new Uri(card.ImgLink));
             }
         }
+        private void ListViewItemDeck_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var item = sender as ListViewItem;
+            if (item != null && item.IsSelected)
+            {
+                Deck selectedDeck = controller.getDecksOfLoggedInUser().ToArray()[lvwDeckList.SelectedIndex];
+                Deck newDeck = new Deck();
+                newDeck.DeckId = selectedDeck.DeckId;
+                newDeck.DeckName = selectedDeck.DeckName;
+                newDeck.DeckUser = selectedDeck.DeckUser;
+                newDeck.DeckClass = selectedDeck.DeckClass;
+                foreach (Card card in selectedDeck.CardList)
+                {
+                    newDeck.CardList.Add(controller.getCardById(card.CardId));
+                }
+                controller.openDeckCreatorWindow(newDeck);
+            }
+        }
+
     }
 }

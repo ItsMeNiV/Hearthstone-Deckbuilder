@@ -27,9 +27,9 @@ namespace Hearthstone_Deckbuilder.UserInterface.NSMainWindow.Controller
             currentCardList = cardDatabaseController.GetAllCards();
         }
 
-        public void openDeckCreatorWindow()
+        public void openDeckCreatorWindow(Deck deck)
         {
-            DeckCreatorWindow deckCreatorWindow = new DeckCreatorWindow();
+            DeckCreatorWindow deckCreatorWindow = new DeckCreatorWindow(deck);
             deckCreatorWindow.Show();
         }
 
@@ -48,23 +48,99 @@ namespace Hearthstone_Deckbuilder.UserInterface.NSMainWindow.Controller
             return currentCardList;
         }
 
-        public void applyFilters(string className, string typeName, string rarityName, int manaCost, int attackValue, int healthValue, int durabilityValue)
+        public void applyFilters(string className, string typeName, string rarityName, string manaCost, string attackValue, string healthValue, string durabilityValue)
         {
+            int manaCostInt = 0;
+            int attackValueInt = 0;
+            int healthValueInt = 0;
+            int durabilityValueInt = 0;
+            if (!manaCost.Equals("None"))
+            {
+                if (manaCost.Equals("8+"))
+                {
+                    manaCostInt = 100;
+                }
+                else
+                {
+                    manaCostInt = Convert.ToInt32(manaCost);
+                }
+            }
+            if (!attackValue.Equals("None"))
+            {
+                if (attackValue.Equals("8+"))
+                {
+                    attackValueInt = 100;
+                }
+                else
+                {
+                    attackValueInt = Convert.ToInt32(attackValue);
+                }
+            }
+            if (!healthValue.Equals("None"))
+            {
+                if (healthValue.Equals("8+"))
+                {
+                    healthValueInt = 100;
+                }
+                else
+                {
+                    healthValueInt = Convert.ToInt32(healthValue);
+                }
+            }
+            if (!durabilityValue.Equals("None"))
+            {
+                if (durabilityValue.Equals("5+"))
+                {
+                    durabilityValueInt = 100;
+                }
+                else
+                {
+                    durabilityValueInt = Convert.ToInt32(durabilityValue);
+                }
+            }
             List<Card> newList = new List<Card>();
             foreach(Card card in currentCardList)
             {
                 bool remove = false;
-                if(!className.Equals("") && !className.Equals(card.CardClass))
+                if (!className.Equals("None") && !className.ToLower().Equals(card.CardClass))
                 {
                     remove = true;
                 }
-                else if (!typeName.Equals("") && !typeName.Equals(card.CardClass))
+                if (!typeName.Equals("None") && !typeName.ToLower().Equals(card.CardType))
                 {
                     remove = true;
                 }
-                else if (!rarityName.Equals("") && !rarityName.Equals(card.CardClass))
+                if (!rarityName.Equals("None") && !rarityName.ToLower().Equals(card.Rarity))
                 {
                     remove = true;
+                }
+                if (!manaCost.Equals("None") && manaCostInt != card.ManaCost)
+                {
+                    if (!(card.ManaCost >= 8))
+                    {
+                        remove = true;
+                    }
+                }
+                if (!attackValue.Equals("None") && attackValueInt != card.Attack)
+                {
+                    if (!(card.Attack >= 8))
+                    {
+                        remove = true;
+                    }
+                }
+                if (!healthValue.Equals("None") && healthValueInt != card.Health)
+                {
+                    if (!(card.Health >= 8))
+                    {
+                        remove = true;
+                    }
+                }
+                if (!durabilityValue.Equals("None") && durabilityValueInt != card.Durability)
+                {
+                    if (!(card.Durability >= 5))
+                    {
+                        remove = true;
+                    }
                 }
                 if (!remove)
                 {
@@ -95,6 +171,11 @@ namespace Hearthstone_Deckbuilder.UserInterface.NSMainWindow.Controller
         public Card getCardByName(string cardName)
         {
             return cardDatabaseController.GetCardByName(cardName);
+        }
+
+        public Card getCardById(string cardId)
+        {
+            return cardDatabaseController.getCardById(cardId);
         }
 
     }

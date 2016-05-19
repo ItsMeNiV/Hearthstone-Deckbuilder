@@ -32,7 +32,7 @@ namespace Hearthstone_Deckbuilder.UserInterface.ClassSelectorWindow
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
-            controller.openDeckCreatorAndCloseClassSelector(this, _classSelected);
+            controller.openDeckCreatorAndCloseClassSelector(this, cmbClass.Text);
         }
 
         public string ClassSelected

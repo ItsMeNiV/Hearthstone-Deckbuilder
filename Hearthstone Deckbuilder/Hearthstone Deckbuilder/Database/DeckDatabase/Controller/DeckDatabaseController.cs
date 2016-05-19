@@ -16,15 +16,17 @@ namespace Hearthstone_Deckbuilder.Database.NSDeckDatabase.Controller
             databaseConnection = new DatabaseConnectionHandler();
         }
 
-        public bool CreateNewDeck(string deckname, User user)
+        public bool CreateNewDeck(string deckname, User user, string className)
         {
             NpgsqlConnection conn = databaseConnection.ConnectToDatabase();
             conn.CreateCommand();
-            NpgsqlCommand command = new NpgsqlCommand("insert into dbdeck(deckname, username) values(:value1, :value2)", conn);
+            NpgsqlCommand command = new NpgsqlCommand("insert into dbdeck(deckname, username, deckclass) values(:value1, :value2, :value3)", conn);
             command.Parameters.Add(new NpgsqlParameter("value1", DbType.String));
             command.Parameters.Add(new NpgsqlParameter("value2", DbType.String));
+            command.Parameters.Add(new NpgsqlParameter("value3", DbType.String));
             command.Parameters[0].Value = deckname;
             command.Parameters[1].Value = user.UserName;
+            command.Parameters[2].Value = className;
             command.Connection = conn;
             if (databaseConnection.ExecuteChangeQuery(command, conn))
             {
@@ -64,6 +66,22 @@ namespace Hearthstone_Deckbuilder.Database.NSDeckDatabase.Controller
             command.Parameters.Add(new NpgsqlParameter("value2", DbType.String));
             command.Parameters[0].Value = card.CardId;
             command.Parameters[1].Value = deck.DeckId;
+            command.Connection = conn;
+            if (databaseConnection.ExecuteChangeQuery(command, conn))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool ResetCardsInDeck(Deck deck)
+        {
+            NpgsqlConnection conn = databaseConnection.ConnectToDatabase();
+            conn.CreateCommand();
+            NpgsqlCommand command = new NpgsqlCommand("delete from dbcardtodeck where deckid = :value1", conn);
+            command.Parameters.Add(new NpgsqlParameter("value1", DbType.String));
+            command.Parameters[0].Value = deck.DeckId;
             command.Connection = conn;
             if (databaseConnection.ExecuteChangeQuery(command, conn))
             {
@@ -122,7 +140,7 @@ namespace Hearthstone_Deckbuilder.Database.NSDeckDatabase.Controller
             {
                 for (int i = 0; i < result.Rows.Count; i++)
                 {
-                    deckList.Add(new Deck(result.Rows[i].ItemArray[0].ToString(), result.Rows[i].ItemArray[1].ToString(), user, result.Rows[i].ItemArray[2].ToString()));
+                    deckList.Add(new Deck(result.Rows[i].ItemArray[0].ToString(), result.Rows[i].ItemArray[1].ToString(), user, result.Rows[i].ItemArray[3].ToString()));
                 }
             }
 
@@ -187,6 +205,21 @@ namespace Hearthstone_Deckbuilder.Database.NSDeckDatabase.Controller
             }
 
             return false;
+        }
+
+        public bool deleteDeck(Deck deck)
+        {
+            NpgsqlConnection conn = databaseConnection.ConnectToDatabase();
+                conn.CreateCommand();
+                NpgsqlCommand command = new NpgsqlCommand("delete from dbdeck where deckid = :value1", conn);
+                command.Parameters.Add(new NpgsqlParameter("value1", DbType.String));
+                command.Parameters[0].Value = deck.DeckId;
+                command.Connection = conn;
+                if (databaseConnection.ExecuteChangeQuery(command, conn))
+                {
+                    return true;
+                }
+                return false;
         }
 
         private bool HasDeckChanged(Deck updatedDeck)

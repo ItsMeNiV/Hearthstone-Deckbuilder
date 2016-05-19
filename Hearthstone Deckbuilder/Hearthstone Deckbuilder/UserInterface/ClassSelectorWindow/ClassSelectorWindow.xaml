@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="ClassSelectorWindow" Height="300" Width="450">
     <Grid>
-        <ComboBox x:Name="cmbClass" Margin="131,77,-19,0" VerticalAlignment="Top" IsReadOnly="True" Text="Class" Height="40" HorizontalAlignment="Left" Width="180" SelectedIndex="0">
+        <ComboBox x:Name="cmbClass" Margin="131,77,0,0" VerticalAlignment="Top" IsReadOnly="True" Text="Class" Height="33" HorizontalAlignment="Left" Width="180" SelectedIndex="0">
             <ComboBoxItem Content="Druid"/>
             <ComboBoxItem Content="Hunter"/>
             <ComboBoxItem Content="Mage"/>
@@ -18,7 +18,7 @@
             <ComboBoxItem Content="Warlock"/>
             <ComboBoxItem Content="Warrior"/>
         </ComboBox>
-        <Label x:Name="lblSelectClass" Content="Select a Class" VerticalAlignment="Top" Margin="180,25,181,0" Height="41"/>
+        <Label x:Name="lblSelectClass" Content="Select a Class" VerticalAlignment="Top" Margin="131,25,131,0" Height="29"/>
         <Button x:Name="btnConfirm" Content="Confirm" Margin="184,166,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="75" Click="btnConfirm_Click"/>
 
     </Grid>

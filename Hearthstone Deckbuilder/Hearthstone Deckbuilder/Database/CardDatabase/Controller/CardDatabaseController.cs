@@ -29,6 +29,15 @@ namespace Hearthstone_Deckbuilder.Database.NSCardDatabase.Controller
         public Card getCardById(string cardId)
         {
             Card returnCard = new Card(cardId);
+            NpgsqlConnection conn = databaseConnection.ConnectToDatabase();
+            conn.CreateCommand();
+            NpgsqlCommand command = new NpgsqlCommand("select * from dbcard", conn);
+            command.Connection = conn;
+            DataTable result = databaseConnection.ExecuteSelectQuery(command, conn);
+            if (result != null)
+            {
+                returnCard = dataTableToCardList(result).ToArray()[0];
+            }
             return returnCard;
         }
 

@@ -1,4 +1,6 @@
-﻿using Hearthstone_Deckbuilder.UserInterface.NSDeckCreatorWindow;
+﻿using Hearthstone_Deckbuilder.NSDatatypes;
+using Hearthstone_Deckbuilder.NSGlobalVariables;
+using Hearthstone_Deckbuilder.UserInterface.NSDeckCreatorWindow;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +19,11 @@ namespace Hearthstone_Deckbuilder.UserInterface.ClassSelectorWindow.Controller
 
         public void openDeckCreatorAndCloseClassSelector(ClassSelectorWindow window, string selectedClass)
         {
-            DeckCreatorWindow deckCreatorWindow = new DeckCreatorWindow();
-            deckCreatorWindow.
+            Deck deck = new Deck();
+            deck.DeckClass = selectedClass;
+            deck.DeckName = "New Deck";
+            deck.DeckUser = GlobalVariables.LoggedInUser;
+            DeckCreatorWindow deckCreatorWindow = new DeckCreatorWindow(deck);
             deckCreatorWindow.Show();
             window.Close();
         }
